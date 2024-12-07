@@ -662,15 +662,233 @@
 
                                                     <div class="col-md-6">
                                                         <!--begin::Input (Dropdown with countries)-->
-                                                        <select data-control="select2" class="form-control form-control-solid form-select" name="company_country" required>
-                                                            <option value="" disabled selected>Select Country</option>
-                                                            <!-- Add countries here -->
-                                                            <option value="NL">Netherlands</option>
-                                                            <option value="UK">United Kingdom</option>
-                                                            <option value="IE">Ireland</option>
-                                                            <option value="US">United States</option>
-                                                            <!-- Add more countries as needed -->
-                                                        </select>
+                                                        <select name="country" aria-label="Select a Country" data-control="select2" data-placeholder="Select a country..." class="form-select form-select-solid form-select-lg fw-semibold">
+                                                                <option value="">Select a Country...</option>
+                                                                <option data-kt-flag="assets/media/flags/afghanistan.svg" value="AF">Afghanistan</option>
+                                                                <option data-kt-flag="assets/media/flags/aland-islands.svg" value="AX">Aland Islands</option>
+                                                                <option data-kt-flag="assets/media/flags/albania.svg" value="AL">Albania</option>
+                                                                <option data-kt-flag="assets/media/flags/algeria.svg" value="DZ">Algeria</option>
+                                                                <option data-kt-flag="assets/media/flags/american-samoa.svg" value="AS">American Samoa</option>
+                                                                <option data-kt-flag="assets/media/flags/andorra.svg" value="AD">Andorra</option>
+                                                                <option data-kt-flag="assets/media/flags/angola.svg" value="AO">Angola</option>
+                                                                <option data-kt-flag="assets/media/flags/anguilla.svg" value="AI">Anguilla</option>
+                                                                <option data-kt-flag="assets/media/flags/antigua-and-barbuda.svg" value="AG">Antigua and Barbuda</option>
+                                                                <option data-kt-flag="assets/media/flags/argentina.svg" value="AR">Argentina</option>
+                                                                <option data-kt-flag="assets/media/flags/armenia.svg" value="AM">Armenia</option>
+                                                                <option data-kt-flag="assets/media/flags/aruba.svg" value="AW">Aruba</option>
+                                                                <option data-kt-flag="assets/media/flags/australia.svg" value="AU">Australia</option>
+                                                                <option data-kt-flag="assets/media/flags/austria.svg" value="AT">Austria</option>
+                                                                <option data-kt-flag="assets/media/flags/azerbaijan.svg" value="AZ">Azerbaijan</option>
+                                                                <option data-kt-flag="assets/media/flags/bahamas.svg" value="BS">Bahamas</option>
+                                                                <option data-kt-flag="assets/media/flags/bahrain.svg" value="BH">Bahrain</option>
+                                                                <option data-kt-flag="assets/media/flags/bangladesh.svg" value="BD">Bangladesh</option>
+                                                                <option data-kt-flag="assets/media/flags/barbados.svg" value="BB">Barbados</option>
+                                                                <option data-kt-flag="assets/media/flags/belarus.svg" value="BY">Belarus</option>
+                                                                <option data-kt-flag="assets/media/flags/belgium.svg" value="BE">Belgium</option>
+                                                                <option data-kt-flag="assets/media/flags/belize.svg" value="BZ">Belize</option>
+                                                                <option data-kt-flag="assets/media/flags/benin.svg" value="BJ">Benin</option>
+                                                                <option data-kt-flag="assets/media/flags/bermuda.svg" value="BM">Bermuda</option>
+                                                                <option data-kt-flag="assets/media/flags/bhutan.svg" value="BT">Bhutan</option>
+                                                                <option data-kt-flag="assets/media/flags/bolivia.svg" value="BO">Bolivia, Plurinational State of</option>
+                                                                <option data-kt-flag="assets/media/flags/bonaire.svg" value="BQ">Bonaire, Sint Eustatius and Saba</option>
+                                                                <option data-kt-flag="assets/media/flags/bosnia-and-herzegovina.svg" value="BA">Bosnia and Herzegovina</option>
+                                                                <option data-kt-flag="assets/media/flags/botswana.svg" value="BW">Botswana</option>
+                                                                <option data-kt-flag="assets/media/flags/brazil.svg" value="BR">Brazil</option>
+                                                                <option data-kt-flag="assets/media/flags/british-indian-ocean-territory.svg" value="IO">British Indian Ocean Territory</option>
+                                                                <option data-kt-flag="assets/media/flags/brunei.svg" value="BN">Brunei Darussalam</option>
+                                                                <option data-kt-flag="assets/media/flags/bulgaria.svg" value="BG">Bulgaria</option>
+                                                                <option data-kt-flag="assets/media/flags/burkina-faso.svg" value="BF">Burkina Faso</option>
+                                                                <option data-kt-flag="assets/media/flags/burundi.svg" value="BI">Burundi</option>
+                                                                <option data-kt-flag="assets/media/flags/cambodia.svg" value="KH">Cambodia</option>
+                                                                <option data-kt-flag="assets/media/flags/cameroon.svg" value="CM">Cameroon</option>
+                                                                <option data-kt-flag="assets/media/flags/canada.svg" value="CA">Canada</option>
+                                                                <option data-kt-flag="assets/media/flags/cape-verde.svg" value="CV">Cape Verde</option>
+                                                                <option data-kt-flag="assets/media/flags/cayman-islands.svg" value="KY">Cayman Islands</option>
+                                                                <option data-kt-flag="assets/media/flags/central-african-republic.svg" value="CF">Central African Republic</option>
+                                                                <option data-kt-flag="assets/media/flags/chad.svg" value="TD">Chad</option>
+                                                                <option data-kt-flag="assets/media/flags/chile.svg" value="CL">Chile</option>
+                                                                <option data-kt-flag="assets/media/flags/china.svg" value="CN">China</option>
+                                                                <option data-kt-flag="assets/media/flags/christmas-island.svg" value="CX">Christmas Island</option>
+                                                                <option data-kt-flag="assets/media/flags/cocos-island.svg" value="CC">Cocos (Keeling) Islands</option>
+                                                                <option data-kt-flag="assets/media/flags/colombia.svg" value="CO">Colombia</option>
+                                                                <option data-kt-flag="assets/media/flags/comoros.svg" value="KM">Comoros</option>
+                                                                <option data-kt-flag="assets/media/flags/cook-islands.svg" value="CK">Cook Islands</option>
+                                                                <option data-kt-flag="assets/media/flags/costa-rica.svg" value="CR">Costa Rica</option>
+                                                                <option data-kt-flag="assets/media/flags/ivory-coast.svg" value="CI">Côte d'Ivoire</option>
+                                                                <option data-kt-flag="assets/media/flags/croatia.svg" value="HR">Croatia</option>
+                                                                <option data-kt-flag="assets/media/flags/cuba.svg" value="CU">Cuba</option>
+                                                                <option data-kt-flag="assets/media/flags/curacao.svg" value="CW">Curaçao</option>
+                                                                <option data-kt-flag="assets/media/flags/czech-republic.svg" value="CZ">Czech Republic</option>
+                                                                <option data-kt-flag="assets/media/flags/denmark.svg" value="DK">Denmark</option>
+                                                                <option data-kt-flag="assets/media/flags/djibouti.svg" value="DJ">Djibouti</option>
+                                                                <option data-kt-flag="assets/media/flags/dominica.svg" value="DM">Dominica</option>
+                                                                <option data-kt-flag="assets/media/flags/dominican-republic.svg" value="DO">Dominican Republic</option>
+                                                                <option data-kt-flag="assets/media/flags/ecuador.svg" value="EC">Ecuador</option>
+                                                                <option data-kt-flag="assets/media/flags/egypt.svg" value="EG">Egypt</option>
+                                                                <option data-kt-flag="assets/media/flags/el-salvador.svg" value="SV">El Salvador</option>
+                                                                <option data-kt-flag="assets/media/flags/equatorial-guinea.svg" value="GQ">Equatorial Guinea</option>
+                                                                <option data-kt-flag="assets/media/flags/eritrea.svg" value="ER">Eritrea</option>
+                                                                <option data-kt-flag="assets/media/flags/estonia.svg" value="EE">Estonia</option>
+                                                                <option data-kt-flag="assets/media/flags/ethiopia.svg" value="ET">Ethiopia</option>
+                                                                <option data-kt-flag="assets/media/flags/falkland-islands.svg" value="FK">Falkland Islands (Malvinas)</option>
+                                                                <option data-kt-flag="assets/media/flags/fiji.svg" value="FJ">Fiji</option>
+                                                                <option data-kt-flag="assets/media/flags/finland.svg" value="FI">Finland</option>
+                                                                <option data-kt-flag="assets/media/flags/france.svg" value="FR">France</option>
+                                                                <option data-kt-flag="assets/media/flags/french-polynesia.svg" value="PF">French Polynesia</option>
+                                                                <option data-kt-flag="assets/media/flags/gabon.svg" value="GA">Gabon</option>
+                                                                <option data-kt-flag="assets/media/flags/gambia.svg" value="GM">Gambia</option>
+                                                                <option data-kt-flag="assets/media/flags/georgia.svg" value="GE">Georgia</option>
+                                                                <option data-kt-flag="assets/media/flags/germany.svg" value="DE">Germany</option>
+                                                                <option data-kt-flag="assets/media/flags/ghana.svg" value="GH">Ghana</option>
+                                                                <option data-kt-flag="assets/media/flags/gibraltar.svg" value="GI">Gibraltar</option>
+                                                                <option data-kt-flag="assets/media/flags/greece.svg" value="GR">Greece</option>
+                                                                <option data-kt-flag="assets/media/flags/greenland.svg" value="GL">Greenland</option>
+                                                                <option data-kt-flag="assets/media/flags/grenada.svg" value="GD">Grenada</option>
+                                                                <option data-kt-flag="assets/media/flags/guam.svg" value="GU">Guam</option>
+                                                                <option data-kt-flag="assets/media/flags/guatemala.svg" value="GT">Guatemala</option>
+                                                                <option data-kt-flag="assets/media/flags/guernsey.svg" value="GG">Guernsey</option>
+                                                                <option data-kt-flag="assets/media/flags/guinea.svg" value="GN">Guinea</option>
+                                                                <option data-kt-flag="assets/media/flags/guinea-bissau.svg" value="GW">Guinea-Bissau</option>
+                                                                <option data-kt-flag="assets/media/flags/haiti.svg" value="HT">Haiti</option>
+                                                                <option data-kt-flag="assets/media/flags/vatican-city.svg" value="VA">Holy See (Vatican City State)</option>
+                                                                <option data-kt-flag="assets/media/flags/honduras.svg" value="HN">Honduras</option>
+                                                                <option data-kt-flag="assets/media/flags/hong-kong.svg" value="HK">Hong Kong</option>
+                                                                <option data-kt-flag="assets/media/flags/hungary.svg" value="HU">Hungary</option>
+                                                                <option data-kt-flag="assets/media/flags/iceland.svg" value="IS">Iceland</option>
+                                                                <option data-kt-flag="assets/media/flags/india.svg" value="IN">India</option>
+                                                                <option data-kt-flag="assets/media/flags/indonesia.svg" value="ID">Indonesia</option>
+                                                                <option data-kt-flag="assets/media/flags/iran.svg" value="IR">Iran, Islamic Republic of</option>
+                                                                <option data-kt-flag="assets/media/flags/iraq.svg" value="IQ">Iraq</option>
+                                                                <option data-kt-flag="assets/media/flags/ireland.svg" value="IE">Ireland</option>
+                                                                <option data-kt-flag="assets/media/flags/isle-of-man.svg" value="IM">Isle of Man</option>
+                                                                <option data-kt-flag="assets/media/flags/israel.svg" value="IL">Israel</option>
+                                                                <option data-kt-flag="assets/media/flags/italy.svg" value="IT">Italy</option>
+                                                                <option data-kt-flag="assets/media/flags/jamaica.svg" value="JM">Jamaica</option>
+                                                                <option data-kt-flag="assets/media/flags/japan.svg" value="JP">Japan</option>
+                                                                <option data-kt-flag="assets/media/flags/jersey.svg" value="JE">Jersey</option>
+                                                                <option data-kt-flag="assets/media/flags/jordan.svg" value="JO">Jordan</option>
+                                                                <option data-kt-flag="assets/media/flags/kazakhstan.svg" value="KZ">Kazakhstan</option>
+                                                                <option data-kt-flag="assets/media/flags/kenya.svg" value="KE">Kenya</option>
+                                                                <option data-kt-flag="assets/media/flags/kiribati.svg" value="KI">Kiribati</option>
+                                                                <option data-kt-flag="assets/media/flags/north-korea.svg" value="KP">Korea, Democratic People's Republic of</option>
+                                                                <option data-kt-flag="assets/media/flags/kuwait.svg" value="KW">Kuwait</option>
+                                                                <option data-kt-flag="assets/media/flags/kyrgyzstan.svg" value="KG">Kyrgyzstan</option>
+                                                                <option data-kt-flag="assets/media/flags/laos.svg" value="LA">Lao People's Democratic Republic</option>
+                                                                <option data-kt-flag="assets/media/flags/latvia.svg" value="LV">Latvia</option>
+                                                                <option data-kt-flag="assets/media/flags/lebanon.svg" value="LB">Lebanon</option>
+                                                                <option data-kt-flag="assets/media/flags/lesotho.svg" value="LS">Lesotho</option>
+                                                                <option data-kt-flag="assets/media/flags/liberia.svg" value="LR">Liberia</option>
+                                                                <option data-kt-flag="assets/media/flags/libya.svg" value="LY">Libya</option>
+                                                                <option data-kt-flag="assets/media/flags/liechtenstein.svg" value="LI">Liechtenstein</option>
+                                                                <option data-kt-flag="assets/media/flags/lithuania.svg" value="LT">Lithuania</option>
+                                                                <option data-kt-flag="assets/media/flags/luxembourg.svg" value="LU">Luxembourg</option>
+                                                                <option data-kt-flag="assets/media/flags/macao.svg" value="MO">Macao</option>
+                                                                <option data-kt-flag="assets/media/flags/madagascar.svg" value="MG">Madagascar</option>
+                                                                <option data-kt-flag="assets/media/flags/malawi.svg" value="MW">Malawi</option>
+                                                                <option data-kt-flag="assets/media/flags/malaysia.svg" value="MY">Malaysia</option>
+                                                                <option data-kt-flag="assets/media/flags/maldives.svg" value="MV">Maldives</option>
+                                                                <option data-kt-flag="assets/media/flags/mali.svg" value="ML">Mali</option>
+                                                                <option data-kt-flag="assets/media/flags/malta.svg" value="MT">Malta</option>
+                                                                <option data-kt-flag="assets/media/flags/marshall-island.svg" value="MH">Marshall Islands</option>
+                                                                <option data-kt-flag="assets/media/flags/martinique.svg" value="MQ">Martinique</option>
+                                                                <option data-kt-flag="assets/media/flags/mauritania.svg" value="MR">Mauritania</option>
+                                                                <option data-kt-flag="assets/media/flags/mauritius.svg" value="MU">Mauritius</option>
+                                                                <option data-kt-flag="assets/media/flags/mexico.svg" value="MX">Mexico</option>
+                                                                <option data-kt-flag="assets/media/flags/micronesia.svg" value="FM">Micronesia, Federated States of</option>
+                                                                <option data-kt-flag="assets/media/flags/moldova.svg" value="MD">Moldova, Republic of</option>
+                                                                <option data-kt-flag="assets/media/flags/monaco.svg" value="MC">Monaco</option>
+                                                                <option data-kt-flag="assets/media/flags/mongolia.svg" value="MN">Mongolia</option>
+                                                                <option data-kt-flag="assets/media/flags/montenegro.svg" value="ME">Montenegro</option>
+                                                                <option data-kt-flag="assets/media/flags/montserrat.svg" value="MS">Montserrat</option>
+                                                                <option data-kt-flag="assets/media/flags/morocco.svg" value="MA">Morocco</option>
+                                                                <option data-kt-flag="assets/media/flags/mozambique.svg" value="MZ">Mozambique</option>
+                                                                <option data-kt-flag="assets/media/flags/myanmar.svg" value="MM">Myanmar</option>
+                                                                <option data-kt-flag="assets/media/flags/namibia.svg" value="NA">Namibia</option>
+                                                                <option data-kt-flag="assets/media/flags/nauru.svg" value="NR">Nauru</option>
+                                                                <option data-kt-flag="assets/media/flags/nepal.svg" value="NP">Nepal</option>
+                                                                <option data-kt-flag="assets/media/flags/netherlands.svg" value="NL">Netherlands</option>
+                                                                <option data-kt-flag="assets/media/flags/new-zealand.svg" value="NZ">New Zealand</option>
+                                                                <option data-kt-flag="assets/media/flags/nicaragua.svg" value="NI">Nicaragua</option>
+                                                                <option data-kt-flag="assets/media/flags/niger.svg" value="NE">Niger</option>
+                                                                <option data-kt-flag="assets/media/flags/nigeria.svg" value="NG">Nigeria</option>
+                                                                <option data-kt-flag="assets/media/flags/niue.svg" value="NU">Niue</option>
+                                                                <option data-kt-flag="assets/media/flags/norfolk-island.svg" value="NF">Norfolk Island</option>
+                                                                <option data-kt-flag="assets/media/flags/northern-mariana-islands.svg" value="MP">Northern Mariana Islands</option>
+                                                                <option data-kt-flag="assets/media/flags/norway.svg" value="NO">Norway</option>
+                                                                <option data-kt-flag="assets/media/flags/oman.svg" value="OM">Oman</option>
+                                                                <option data-kt-flag="assets/media/flags/pakistan.svg" value="PK">Pakistan</option>
+                                                                <option data-kt-flag="assets/media/flags/palau.svg" value="PW">Palau</option>
+                                                                <option data-kt-flag="assets/media/flags/palestine.svg" value="PS">Palestinian Territory, Occupied</option>
+                                                                <option data-kt-flag="assets/media/flags/panama.svg" value="PA">Panama</option>
+                                                                <option data-kt-flag="assets/media/flags/papua-new-guinea.svg" value="PG">Papua New Guinea</option>
+                                                                <option data-kt-flag="assets/media/flags/paraguay.svg" value="PY">Paraguay</option>
+                                                                <option data-kt-flag="assets/media/flags/peru.svg" value="PE">Peru</option>
+                                                                <option data-kt-flag="assets/media/flags/philippines.svg" value="PH">Philippines</option>
+                                                                <option data-kt-flag="assets/media/flags/poland.svg" value="PL">Poland</option>
+                                                                <option data-kt-flag="assets/media/flags/portugal.svg" value="PT">Portugal</option>
+                                                                <option data-kt-flag="assets/media/flags/puerto-rico.svg" value="PR">Puerto Rico</option>
+                                                                <option data-kt-flag="assets/media/flags/qatar.svg" value="QA">Qatar</option>
+                                                                <option data-kt-flag="assets/media/flags/romania.svg" value="RO">Romania</option>
+                                                                <option data-kt-flag="assets/media/flags/russia.svg" value="RU">Russian Federation</option>
+                                                                <option data-kt-flag="assets/media/flags/rwanda.svg" value="RW">Rwanda</option>
+                                                                <option data-kt-flag="assets/media/flags/st-barts.svg" value="BL">Saint Barthélemy</option>
+                                                                <option data-kt-flag="assets/media/flags/saint-kitts-and-nevis.svg" value="KN">Saint Kitts and Nevis</option>
+                                                                <option data-kt-flag="assets/media/flags/st-lucia.svg" value="LC">Saint Lucia</option>
+                                                                <option data-kt-flag="assets/media/flags/sint-maarten.svg" value="MF">Saint Martin (French part)</option>
+                                                                <option data-kt-flag="assets/media/flags/st-vincent-and-the-grenadines.svg" value="VC">Saint Vincent and the Grenadines</option>
+                                                                <option data-kt-flag="assets/media/flags/samoa.svg" value="WS">Samoa</option>
+                                                                <option data-kt-flag="assets/media/flags/san-marino.svg" value="SM">San Marino</option>
+                                                                <option data-kt-flag="assets/media/flags/sao-tome-and-prince.svg" value="ST">Sao Tome and Principe</option>
+                                                                <option data-kt-flag="assets/media/flags/saudi-arabia.svg" value="SA">Saudi Arabia</option>
+                                                                <option data-kt-flag="assets/media/flags/senegal.svg" value="SN">Senegal</option>
+                                                                <option data-kt-flag="assets/media/flags/serbia.svg" value="RS">Serbia</option>
+                                                                <option data-kt-flag="assets/media/flags/seychelles.svg" value="SC">Seychelles</option>
+                                                                <option data-kt-flag="assets/media/flags/sierra-leone.svg" value="SL">Sierra Leone</option>
+                                                                <option data-kt-flag="assets/media/flags/singapore.svg" value="SG">Singapore</option>
+                                                                <option data-kt-flag="assets/media/flags/sint-maarten.svg" value="SX">Sint Maarten (Dutch part)</option>
+                                                                <option data-kt-flag="assets/media/flags/slovakia.svg" value="SK">Slovakia</option>
+                                                                <option data-kt-flag="assets/media/flags/slovenia.svg" value="SI">Slovenia</option>
+                                                                <option data-kt-flag="assets/media/flags/solomon-islands.svg" value="SB">Solomon Islands</option>
+                                                                <option data-kt-flag="assets/media/flags/somalia.svg" value="SO">Somalia</option>
+                                                                <option data-kt-flag="assets/media/flags/south-africa.svg" value="ZA">South Africa</option>
+                                                                <option data-kt-flag="assets/media/flags/south-korea.svg" value="KR">South Korea</option>
+                                                                <option data-kt-flag="assets/media/flags/south-sudan.svg" value="SS">South Sudan</option>
+                                                                <option data-kt-flag="assets/media/flags/spain.svg" value="ES">Spain</option>
+                                                                <option data-kt-flag="assets/media/flags/sri-lanka.svg" value="LK">Sri Lanka</option>
+                                                                <option data-kt-flag="assets/media/flags/sudan.svg" value="SD">Sudan</option>
+                                                                <option data-kt-flag="assets/media/flags/suriname.svg" value="SR">Suriname</option>
+                                                                <option data-kt-flag="assets/media/flags/swaziland.svg" value="SZ">Swaziland</option>
+                                                                <option data-kt-flag="assets/media/flags/sweden.svg" value="SE">Sweden</option>
+                                                                <option data-kt-flag="assets/media/flags/switzerland.svg" value="CH">Switzerland</option>
+                                                                <option data-kt-flag="assets/media/flags/syria.svg" value="SY">Syrian Arab Republic</option>
+                                                                <option data-kt-flag="assets/media/flags/taiwan.svg" value="TW">Taiwan, Province of China</option>
+                                                                <option data-kt-flag="assets/media/flags/tajikistan.svg" value="TJ">Tajikistan</option>
+                                                                <option data-kt-flag="assets/media/flags/tanzania.svg" value="TZ">Tanzania, United Republic of</option>
+                                                                <option data-kt-flag="assets/media/flags/thailand.svg" value="TH">Thailand</option>
+                                                                <option data-kt-flag="assets/media/flags/togo.svg" value="TG">Togo</option>
+                                                                <option data-kt-flag="assets/media/flags/tokelau.svg" value="TK">Tokelau</option>
+                                                                <option data-kt-flag="assets/media/flags/tonga.svg" value="TO">Tonga</option>
+                                                                <option data-kt-flag="assets/media/flags/trinidad-and-tobago.svg" value="TT">Trinidad and Tobago</option>
+                                                                <option data-kt-flag="assets/media/flags/tunisia.svg" value="TN">Tunisia</option>
+                                                                <option data-kt-flag="assets/media/flags/turkey.svg" value="TR">Turkey</option>
+                                                                <option data-kt-flag="assets/media/flags/turkmenistan.svg" value="TM">Turkmenistan</option>
+                                                                <option data-kt-flag="assets/media/flags/turks-and-caicos.svg" value="TC">Turks and Caicos Islands</option>
+                                                                <option data-kt-flag="assets/media/flags/tuvalu.svg" value="TV">Tuvalu</option>
+                                                                <option data-kt-flag="assets/media/flags/uganda.svg" value="UG">Uganda</option>
+                                                                <option data-kt-flag="assets/media/flags/ukraine.svg" value="UA">Ukraine</option>
+                                                                <option data-kt-flag="assets/media/flags/united-arab-emirates.svg" value="AE">United Arab Emirates</option>
+                                                                <option data-kt-flag="assets/media/flags/united-kingdom.svg" value="GB">United Kingdom</option>
+                                                                <option data-kt-flag="assets/media/flags/united-states.svg" value="US">United States</option>
+                                                                <option data-kt-flag="assets/media/flags/uruguay.svg" value="UY">Uruguay</option>
+                                                                <option data-kt-flag="assets/media/flags/uzbekistan.svg" value="UZ">Uzbekistan</option>
+                                                                <option data-kt-flag="assets/media/flags/vanuatu.svg" value="VU">Vanuatu</option>
+                                                                <option data-kt-flag="assets/media/flags/venezuela.svg" value="VE">Venezuela, Bolivarian Republic of</option>
+                                                                <option data-kt-flag="assets/media/flags/vietnam.svg" value="VN">Vietnam</option>
+                                                                <option data-kt-flag="assets/media/flags/virgin-islands.svg" value="VI">Virgin Islands</option>
+                                                                <option data-kt-flag="assets/media/flags/yemen.svg" value="YE">Yemen</option>
+                                                                <option data-kt-flag="assets/media/flags/zambia.svg" value="ZM">Zambia</option>
+                                                                <option data-kt-flag="assets/media/flags/zimbabwe.svg" value="ZW">Zimbabwe</option>
+                                                            </select>
                                                         <!--end::Input-->
                                                         <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback"></div>
                                                     </div>
