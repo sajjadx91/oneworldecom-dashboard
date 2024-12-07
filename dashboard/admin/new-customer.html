@@ -587,7 +587,7 @@
 
                                                     <div class="col-md-6">
                                                         <!--begin::Input (Dropdown with countries)-->
-                                                        <select class="form-control form-control-solid form-select" name="company_country" required>
+                                                        <select data-control="select2" class="form-control form-control-solid form-select" name="company_country" required>
                                                             <option value="" disabled selected>Select Country</option>
                                                             <!-- Add countries here -->
                                                             <option value="NL">Netherlands</option>
@@ -909,9 +909,10 @@
                                                         </label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <select class="form-control form-control-solid form-select" name="preferred_payout_currency">
+                                                        <select data-control="select2" class="form-control form-control-solid form-select" name="preferred_payout_currency">
                                                             <option value="USD">USD</option>
                                                             <option value="EUR">EUR</option>
+                                                            <option value="GBP">GBP</option>
                                                         </select>
                                                     </div>
                                                 </div>
