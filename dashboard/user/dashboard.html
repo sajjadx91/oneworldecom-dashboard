@@ -831,8 +831,8 @@ var revenueChart = function (element) {
     var initChart = function(chart) {
 
         // Detect screen width
-        var isMobile = window.innerWidth <= 768;
-        var height = isMobile ? 250 : parseInt(KTUtil.css(element, 'height')); // Adjust height for mobile
+        var isMobile = window.innerWidth <= 844;
+        var height = 250;
         var labelColor = KTUtil.getCssVariableValue('--bs-gray-500');
         var borderColor = KTUtil.getCssVariableValue('--bs-border-dashed-color');
         var baseColor = KTUtil.getCssVariableValue('--bs-primary');
