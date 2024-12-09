@@ -976,7 +976,7 @@ var revenueChart = function (element) {
         setTimeout(function() {
             chart.self.render();
             chart.rendered = true;
-        }, 200);
+        }, 500);
     };
 
     // Public methods
@@ -992,7 +992,7 @@ var revenueChart = function (element) {
                         chart.self.destroy();
                     }
                     initChart(chart);
-                }, 200); // 200ms debounce time
+                }, 500); // 200ms debounce time
             });
         }
     }
