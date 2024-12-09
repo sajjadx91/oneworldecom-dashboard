@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="assets/plugins/global/plugins.bundle.css">
     <link rel="stylesheet" href="assets/css/style.bundle.css">
      <!--begin::Vendor Stylesheets(used for this page only)-->
-    <link href="/html/metronic/docs/assets/plugins/custom/prismjs/prismjs.bundle.css" rel="stylesheet" type="text/css"/>
-    <link href="/html/metronic/docs/assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/plugins/custom/prismjs/prismjs.bundle.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css"/>
     <!--end::Vendor Stylesheets-->
 
     <style type="text/css">
@@ -44,14 +44,18 @@
 
         /* Add a line above and below the header */
         .custom-table-header {
-            border-top: 1px solid #ddd; /* Thin line above */
-            border-bottom: 1px solid #ddd; /* Thin line below */
+            border-top: 1px solid #ddd !important; /* Thin line above */
+            border-bottom: 1px solid #ddd !important; /* Thin line below */
         }
 
         /* Optional: Adjust padding for header cells for better spacing */
         .custom-table-header th {
             padding-top: 10px;
             padding-bottom: 10px;
+        }
+
+        table.dataTable {
+            border-collapse: collapse !important; /* Overrides the separate rule */
         }
     </style>
 </head>
