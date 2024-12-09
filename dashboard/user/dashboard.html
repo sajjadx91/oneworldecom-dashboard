@@ -814,7 +814,7 @@
 
         
 
-var revenueChart = function () {
+var revenueChart = function (element) {
     var chart = {
         self: null,
         rendered: false
@@ -823,6 +823,7 @@ var revenueChart = function () {
     var element = document.getElementById("revenueChart");
 
     if (!element) {
+        console.log('revenueChart element not found');
         return;
     }
 
