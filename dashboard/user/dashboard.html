@@ -983,12 +983,16 @@ var revenueChart = function (element) {
     return {
         init: function () {
             initChart(chart);
-            // Add resize listener for responsiveness
+             // Debounced resize handler
+            let resizeTimeout;
             window.addEventListener('resize', function () {
-                if (chart.rendered) {
-                    chart.self.destroy();
-                }
-                initChart(chart);
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(function () {
+                    if (chart.rendered) {
+                        chart.self.destroy();
+                    }
+                    initChart(chart);
+                }, 200); // 200ms debounce time
             });
         }
     }
