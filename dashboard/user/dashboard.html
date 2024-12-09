@@ -820,13 +820,14 @@ var revenueChart = function () {
         rendered: false
     };
 
+    var element = document.getElementById("revenueChart");
+
+    if (!element) {
+        return;
+    }
+
     // Private methods
     var initChart = function(chart) {
-        var element = document.getElementById("revenueChart");
-
-        if (!element) {
-            return;
-        }
 
         // Detect screen width
         var isMobile = window.innerWidth <= 768;
@@ -874,14 +875,14 @@ var revenueChart = function () {
                 colors: [baseColor]
             },
             xaxis: {
-                categories: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                 axisBorder: {
                     show: false,
                 },
                 axisTicks: {
                     show: false
                 },
-                tickAmount: isMobile ? 6 : 6, // Fewer ticks for mobile
+                tickAmount: isMobile ? 6 : 12, // Fewer ticks for mobile
                 labels: {
                     rotate: isMobile ? -45 : 0, // Rotate labels for mobile
                     rotateAlways: isMobile,
