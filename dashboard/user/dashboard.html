@@ -17,29 +17,24 @@
             font-family: sans-serif;
         }
 
-        /* Inactive Tab Border Color */
-        .nav-tabs .nav-link {
-            border-color: #d6d6d6 !important; /* Darker gray for inactive tabs */
-        }
-
         .nav-tabs .nav-link:hover {
-            border-color: #007bff !important;
-            color: #007bff !important;
+            border-color: var(--bs-primary) !important;
+            color: var(--bs-primary) !important;
         }
 
         /* Hover Styles for Badge in Tab */
         .nav-tabs .nav-link:hover .badge {
-            color: #007bff !important;              /* Badge text color on hover */
+            color: var(--bs-primary) !important;              /* Badge text color on hover */
         }
 
         /* Active Tab Styles */
         .nav-tabs .nav-link.active {
-            border-color: #007bff !important; /* Primary color for active tab */
-            color: #007bff !important;        /* Text color as primary */
+            border-color: var(--bs-primary) !important; /* Primary color for active tab */
+            color: var(--bs-primary) !important;        /* Text color as primary */
         }
 
         .nav-tabs .nav-link.active .badge {
-            color: #007bff !important;              /* Badge text color */
+            color: var(--bs-primary) !important;              /* Badge text color */
         }
 
         /* Add a line above and below the header */
@@ -83,7 +78,7 @@
                         <!--begin::Mobile logo-->
                         <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
                             <a href="dashboard.html" class="d-lg-none">
-                                <img alt="Logo" src="assets/media/logos/default-small.svg" class="h-30px" />
+                                <img alt="Logo" src="assets/logos/default-small.svg" class="h-30px" />
                             </a>
                             <!--begin::Page title-->
                             <div class="d-lg-none mx-5 d-flex flex-column justify-content-center flex-wrap me-3">
@@ -724,7 +719,7 @@
                                                         <div class="card">
                                                             <div class="card-body">
                                                                 <h6 class="card-title">Net Volume</h6>
-                                                                <canvas id="netVolumeChart" style="max-height: 300px;"></canvas>
+                                                                <div id="netVolumeChart" style="height: 250px;"></div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -733,7 +728,7 @@
                                                         <div class="card">
                                                             <div class="card-body">
                                                                 <h6 class="card-title">Disputes</h6>
-                                                                <canvas id="disputesChart" style="max-height: 300px;"></canvas>
+                                                                <div id="disputesChart" style="height: 250px;"></div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -742,7 +737,7 @@
                                                         <div class="card">
                                                             <div class="card-body">
                                                                 <h6 class="card-title">Refunds</h6>
-                                                                <canvas id="refundsChart" style="max-height: 300px;"></canvas>
+                                                                <div id="refundsChart" style="height: 250px;"></div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -751,7 +746,7 @@
                                                         <div class="card">
                                                             <div class="card-body">
                                                                 <h6 class="card-title">New Customers</h6>
-                                                                <canvas id="newCustomersChart" style="max-height: 300px;"></canvas>
+                                                                <div id="newCustomersChart" style="height: 250px;"></div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -773,175 +768,584 @@
 
     <!-- Chart.js Initialization -->
     <script>
-        const createLineChart = (id, label, color) => {
-            new Chart(document.getElementById(id), {
-                type: 'line',
-                data: {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                    datasets: [{
-                        label: label,
-                        data: [10, 20, 15, 30, 25, 40, 22, 12, 18, 26, 30, 20],
-                        borderColor: color,
-                        borderWidth: 2,
-                        fill: false
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    let value = context.raw; // The raw value of the data point
-                                    return `${context.dataset.label}: ${value}%`;
-                                }
+
+        var revenueChart = function () {
+            var chart = {
+                self: null,
+                rendered: false,
+                currentWidth: null
+            };
+
+            var element = document.getElementById("revenueChart");
+
+            if (!element) {
+                return;
+            }
+
+            // Private methods
+            var initChart = function (chart) {
+                var isMobile = window.innerWidth <= 844;
+                var height = 250;
+                var labelColor = KTUtil.getCssVariableValue('--bs-gray-500');
+                var borderColor = KTUtil.getCssVariableValue('--bs-border-dashed-color');
+                var baseColor = KTUtil.getCssVariableValue('--bs-primary');
+                var lightColor = KTUtil.getCssVariableValue('--bs-primary');
+
+                var options = {
+                    series: [{
+                        name: 'Volume',
+                        data: [8, 6, 20, 15, 8, 18, 22, 16, 20, 20, 18, 22]
+                    }],
+                    chart: {
+                        fontFamily: 'inherit',
+                        type: 'area',
+                        height: height,
+                        toolbar: { show: false }
+                    },
+                    plotOptions: {},
+                    legend: {
+                        show: false
+                    },
+                    dataLabels: {
+                        enabled: false // Explicitly disable data labels
+                    },
+                    fill: {
+                        type: "gradient",
+                        gradient: {
+                            opacityFrom: 0.4,
+                            opacityTo: 0
+                        }
+                    },
+                    stroke: {
+                        curve: 'smooth',
+                        colors: [baseColor]
+                    },
+                    xaxis: {
+                        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                        tickAmount: isMobile ? 6 : 12,
+                        labels: {
+                            rotate: isMobile ? -45 : 0,
+                            style: {
+                                colors: labelColor,
+                                fontSize: isMobile ? '10px' : '12px'
                             }
                         }
                     },
-                    scales: {
-                        y: {
-                            ticks: {
-                                callback: function(value) {
-                                    return value + '%'; // Add % symbol to y-axis labels
-                                }
+                    yaxis: {
+                        tickAmount: isMobile ? 2 : 4,
+                        max: 22,
+                        labels: {
+                            style: {
+                                colors: labelColor,
+                                fontSize: isMobile ? '10px' : '12px'
+                            },
+                            formatter: function (val) {
+                                return '$' + val + "K";
                             }
                         }
+                    },
+                    colors: [lightColor],
+                    grid: {
+                        borderColor: borderColor
                     }
-                }
-            });
-        };
+                };
 
-        
-
-    var revenueChart = function () {
-        var chart = {
-            self: null,
-            rendered: false,
-            currentWidth: null
-        };
-
-        var element = document.getElementById("revenueChart");
-
-        if (!element) {
-            console.log('revenueChart element not found');
-            return;
-        }
-
-        // Private methods
-        var initChart = function (chart) {
-            var isMobile = window.innerWidth <= 844;
-            var height = 250;
-            var labelColor = KTUtil.getCssVariableValue('--bs-gray-500');
-            var borderColor = KTUtil.getCssVariableValue('--bs-border-dashed-color');
-            var baseColor = KTUtil.getCssVariableValue('--bs-primary');
-            var lightColor = KTUtil.getCssVariableValue('--bs-primary');
-
-            var options = {
-                series: [{
-                    name: 'Volume',
-                    data: [8, 6, 20, 15, 8, 18, 22, 16, 20, 20, 18, 22]
-                }],
-                chart: {
-                    fontFamily: 'inherit',
-                    type: 'area',
-                    height: height,
-                    toolbar: { show: false }
-                },
-                plotOptions: {},
-                legend: {
-                    show: false
-                },
-                dataLabels: {
-                    enabled: false // Explicitly disable data labels
-                },
-                fill: {
-                    type: "gradient",
-                    gradient: {
-                        opacityFrom: 0.4,
-                        opacityTo: 0
-                    }
-                },
-                stroke: {
-                    curve: 'smooth',
-                    colors: [baseColor]
-                },
-                xaxis: {
-                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                    tickAmount: isMobile ? 6 : 12,
-                    labels: {
-                        rotate: isMobile ? -45 : 0,
-                        style: {
-                            colors: labelColor,
-                            fontSize: isMobile ? '10px' : '12px'
-                        }
-                    }
-                },
-                yaxis: {
-                    tickAmount: isMobile ? 2 : 4,
-                    max: 22,
-                    labels: {
-                        style: {
-                            colors: labelColor,
-                            fontSize: isMobile ? '10px' : '12px'
-                        },
-                        formatter: function (val) {
-                            return '$' + val + "K";
-                        }
-                    }
-                },
-                colors: [lightColor],
-                grid: {
-                    borderColor: borderColor
-                }
+                chart.self = new ApexCharts(element, options);
+                chart.self.render();
+                chart.rendered = true;
+                chart.currentWidth = element.offsetWidth;
             };
 
-            chart.self = new ApexCharts(element, options);
-            chart.self.render();
-            chart.rendered = true;
-            chart.currentWidth = element.offsetWidth;
-        };
+            // Public methods
+            return {
+                init: function () {
+                    initChart(chart);
 
-        // Public methods
-        return {
-            init: function () {
-                initChart(chart);
+                    let resizeTimeout;
+                    window.addEventListener('resize', function () {
+                        clearTimeout(resizeTimeout);
 
-                let resizeTimeout;
-                window.addEventListener('resize', function () {
-                    clearTimeout(resizeTimeout);
+                        resizeTimeout = setTimeout(function () {
+                            var newWidth = element.offsetWidth;
 
-                    resizeTimeout = setTimeout(function () {
-                        var newWidth = element.offsetWidth;
-
-                        // Only re-render if the width has changed
-                        if (chart.currentWidth !== newWidth) {
-                            if (chart.rendered) {
-                                chart.self.destroy();
+                            // Only re-render if the width has changed
+                            if (chart.currentWidth !== newWidth) {
+                                if (chart.rendered) {
+                                    chart.self.destroy();
+                                }
+                                initChart(chart);
                             }
-                            initChart(chart);
-                        }
-                    }, 300); // Shorter debounce for better responsiveness
-                });
+                        }, 300); // Shorter debounce for better responsiveness
+                    });
+                }
+            };
+        }();
+
+        var netVolumeChart = function () {
+            var chart = {
+                self: null,
+                rendered: false,
+                currentWidth: null
+            };
+
+            var element = document.getElementById('netVolumeChart');
+
+            if (!element) {
+                return;
             }
-        };
-    }();
 
-    // Webpack support
-    if (typeof module !== 'undefined') {
-        module.exports = revenueChart;
-    }
+            // Private methods
+            var initChart = function (chart) {
+                var isMobile = window.innerWidth <= 844;
+                var height = 250;
+                var labelColor = KTUtil.getCssVariableValue('--bs-gray-500');
+                var borderColor = KTUtil.getCssVariableValue('--bs-border-dashed-color');
+                var baseColor = KTUtil.getCssVariableValue('--bs-primary');
+                var lightColor = KTUtil.getCssVariableValue('--bs-primary');
 
-    // On document ready
-    KTUtil.onDOMContentLoaded(function() {
-        revenueChart.init();
-    });
+                var options = {
+                    series: [{
+                        name: 'Volume',
+                        data: [16, 8, 20, 22, 18, 22, 6, 20, 15, 8, 18, 20]
+                    }],
+                    chart: {
+                        fontFamily: 'inherit',
+                        type: 'area',
+                        height: height,
+                        toolbar: { show: false }
+                    },
+                    plotOptions: {},
+                    legend: {
+                        show: false
+                    },
+                    dataLabels: {
+                        enabled: false // Explicitly disable data labels
+                    },
+                    fill: {
+                        type: "gradient",
+                        gradient: {
+                            opacityFrom: 0.4,
+                            opacityTo: 0
+                        }
+                    },
+                    stroke: {
+                        curve: 'smooth',
+                        colors: [baseColor]
+                    },
+                    xaxis: {
+                        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                        tickAmount: isMobile ? 6 : 12,
+                        labels: {
+                            rotate: isMobile ? -45 : 0,
+                            style: {
+                                colors: labelColor,
+                                fontSize: isMobile ? '10px' : '12px'
+                            }
+                        }
+                    },
+                    yaxis: {
+                        tickAmount: isMobile ? 2 : 4,
+                        max: 22,
+                        labels: {
+                            style: {
+                                colors: labelColor,
+                                fontSize: isMobile ? '10px' : '12px'
+                            },
+                            formatter: function (val) {
+                                return '$' + val + "K";
+                            }
+                        }
+                    },
+                    colors: [lightColor],
+                    grid: {
+                        borderColor: borderColor
+                    }
+                };
 
-    // Second Section: Line Charts
-    createLineChart('netVolumeChart', 'Net Volume', KTUtil.getCssVariableValue('--bs-primary'));
-    createLineChart('disputesChart', 'Disputes', 'rgba(255, 99, 132, 1)');
-    createLineChart('refundsChart', 'Refunds', 'rgba(255, 206, 86, 1)');
-    createLineChart('newCustomersChart', 'New Customers', KTUtil.getCssVariableValue('--bs-success'));
+                chart.self = new ApexCharts(element, options);
+                chart.self.render();
+                chart.rendered = true;
+                chart.currentWidth = element.offsetWidth;
+            };
+
+            // Public methods
+            return {
+                init: function () {
+                    initChart(chart);
+
+                    let resizeTimeout;
+                    window.addEventListener('resize', function () {
+                        clearTimeout(resizeTimeout);
+
+                        resizeTimeout = setTimeout(function () {
+                            var newWidth = element.offsetWidth;
+
+                            // Only re-render if the width has changed
+                            if (chart.currentWidth !== newWidth) {
+                                if (chart.rendered) {
+                                    chart.self.destroy();
+                                }
+                                initChart(chart);
+                            }
+                        }, 300); // Shorter debounce for better responsiveness
+                    });
+                }
+            };
+        }();
+
+        var disputesChart = function () {
+            var chart = {
+                self: null,
+                rendered: false,
+                currentWidth: null
+            };
+
+            var element = document.getElementById('disputesChart');
+
+            if (!element) {
+                return;
+            }
+
+            // Private methods
+            var initChart = function (chart) {
+                var isMobile = window.innerWidth <= 844;
+                var height = 250;
+                var labelColor = KTUtil.getCssVariableValue('--bs-gray-500');
+                var borderColor = KTUtil.getCssVariableValue('--bs-border-dashed-color');
+                var baseColor = KTUtil.getCssVariableValue('--bs-primary');
+                var lightColor = KTUtil.getCssVariableValue('--bs-primary');
+
+                var options = {
+                    series: [{
+                        name: 'Percentage',
+                        data: [6, 8, 5, 7, 2, 4, 8, 6, 3, 7, 6, 5]
+                    }],
+                    chart: {
+                        fontFamily: 'inherit',
+                        type: 'area',
+                        height: height,
+                        toolbar: { show: false }
+                    },
+                    plotOptions: {},
+                    legend: {
+                        show: false
+                    },
+                    dataLabels: {
+                        enabled: false // Explicitly disable data labels
+                    },
+                    fill: {
+                        type: "gradient",
+                        gradient: {
+                            opacityFrom: 0.4,
+                            opacityTo: 0
+                        }
+                    },
+                    stroke: {
+                        curve: 'smooth',
+                        colors: [baseColor]
+                    },
+                    xaxis: {
+                        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                        tickAmount: isMobile ? 6 : 12,
+                        labels: {
+                            rotate: isMobile ? -45 : 0,
+                            style: {
+                                colors: labelColor,
+                                fontSize: isMobile ? '10px' : '12px'
+                            }
+                        }
+                    },
+                    yaxis: {
+                        tickAmount: isMobile ? 2 : 4,
+                        max: 8,
+                        labels: {
+                            style: {
+                                colors: labelColor,
+                                fontSize: isMobile ? '10px' : '12px'
+                            },
+                            formatter: function (val) {
+                                return val + "%";
+                            }
+                        }
+                    },
+                    colors: [lightColor],
+                    grid: {
+                        borderColor: borderColor
+                    }
+                };
+
+                chart.self = new ApexCharts(element, options);
+                chart.self.render();
+                chart.rendered = true;
+                chart.currentWidth = element.offsetWidth;
+            };
+
+            // Public methods
+            return {
+                init: function () {
+                    initChart(chart);
+
+                    let resizeTimeout;
+                    window.addEventListener('resize', function () {
+                        clearTimeout(resizeTimeout);
+
+                        resizeTimeout = setTimeout(function () {
+                            var newWidth = element.offsetWidth;
+
+                            // Only re-render if the width has changed
+                            if (chart.currentWidth !== newWidth) {
+                                if (chart.rendered) {
+                                    chart.self.destroy();
+                                }
+                                initChart(chart);
+                            }
+                        }, 300); // Shorter debounce for better responsiveness
+                    });
+                }
+            };
+        }();
+
+        var refundsChart = function () {
+            var chart = {
+                self: null,
+                rendered: false,
+                currentWidth: null
+            };
+
+            var element = document.getElementById('refundsChart');
+
+            if (!element) {
+                return;
+            }
+
+            // Private methods
+            var initChart = function (chart) {
+                var isMobile = window.innerWidth <= 844;
+                var height = 250;
+                var labelColor = KTUtil.getCssVariableValue('--bs-gray-500');
+                var borderColor = KTUtil.getCssVariableValue('--bs-border-dashed-color');
+                var baseColor = KTUtil.getCssVariableValue('--bs-primary');
+                var lightColor = KTUtil.getCssVariableValue('--bs-primary');
+
+                var options = {
+                    series: [{
+                        name: 'Percentage',
+                        data: [6, 8, 8, 6, 7, 5, 2, 5, 3, 8, 7, 2]
+                    }],
+                    chart: {
+                        fontFamily: 'inherit',
+                        type: 'area',
+                        height: height,
+                        toolbar: { show: false }
+                    },
+                    plotOptions: {},
+                    legend: {
+                        show: false
+                    },
+                    dataLabels: {
+                        enabled: false // Explicitly disable data labels
+                    },
+                    fill: {
+                        type: "gradient",
+                        gradient: {
+                            opacityFrom: 0.4,
+                            opacityTo: 0
+                        }
+                    },
+                    stroke: {
+                        curve: 'smooth',
+                        colors: [baseColor]
+                    },
+                    xaxis: {
+                        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                        tickAmount: isMobile ? 6 : 12,
+                        labels: {
+                            rotate: isMobile ? -45 : 0,
+                            style: {
+                                colors: labelColor,
+                                fontSize: isMobile ? '10px' : '12px'
+                            }
+                        }
+                    },
+                    yaxis: {
+                        tickAmount: isMobile ? 2 : 4,
+                        max: 8,
+                        labels: {
+                            style: {
+                                colors: labelColor,
+                                fontSize: isMobile ? '10px' : '12px'
+                            },
+                            formatter: function (val) {
+                                return val + "%";
+                            }
+                        }
+                    },
+                    colors: [lightColor],
+                    grid: {
+                        borderColor: borderColor
+                    }
+                };
+
+                chart.self = new ApexCharts(element, options);
+                chart.self.render();
+                chart.rendered = true;
+                chart.currentWidth = element.offsetWidth;
+            };
+
+            // Public methods
+            return {
+                init: function () {
+                    initChart(chart);
+
+                    let resizeTimeout;
+                    window.addEventListener('resize', function () {
+                        clearTimeout(resizeTimeout);
+
+                        resizeTimeout = setTimeout(function () {
+                            var newWidth = element.offsetWidth;
+
+                            // Only re-render if the width has changed
+                            if (chart.currentWidth !== newWidth) {
+                                if (chart.rendered) {
+                                    chart.self.destroy();
+                                }
+                                initChart(chart);
+                            }
+                        }, 300); // Shorter debounce for better responsiveness
+                    });
+                }
+            };
+        }();
+
+        var newCustomersChart = function () {
+            var chart = {
+                self: null,
+                rendered: false,
+                currentWidth: null
+            };
+
+            var element = document.getElementById('newCustomersChart');
+
+            if (!element) {
+                return;
+            }
+
+            // Private methods
+            var initChart = function (chart) {
+                var isMobile = window.innerWidth <= 844;
+                var height = 250;
+                var labelColor = KTUtil.getCssVariableValue('--bs-gray-500');
+                var borderColor = KTUtil.getCssVariableValue('--bs-border-dashed-color');
+                var baseColor = KTUtil.getCssVariableValue('--bs-primary');
+                var lightColor = KTUtil.getCssVariableValue('--bs-primary');
+
+                var options = {
+                    series: [{
+                        name: 'New',
+                        data: [50, 120, 35, 78, 122, 14, 88, 96, 43, 132, 17, 73]
+                    }],
+                    chart: {
+                        fontFamily: 'inherit',
+                        type: 'area',
+                        height: height,
+                        toolbar: { show: false }
+                    },
+                    plotOptions: {},
+                    legend: {
+                        show: false
+                    },
+                    dataLabels: {
+                        enabled: false // Explicitly disable data labels
+                    },
+                    fill: {
+                        type: "gradient",
+                        gradient: {
+                            opacityFrom: 0.4,
+                            opacityTo: 0
+                        }
+                    },
+                    stroke: {
+                        curve: 'smooth',
+                        colors: [baseColor]
+                    },
+                    xaxis: {
+                        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                        tickAmount: isMobile ? 6 : 12,
+                        labels: {
+                            rotate: isMobile ? -45 : 0,
+                            style: {
+                                colors: labelColor,
+                                fontSize: isMobile ? '10px' : '12px'
+                            }
+                        }
+                    },
+                    yaxis: {
+                        tickAmount: isMobile ? 2 : 4,
+                        max: 132,
+                        labels: {
+                            style: {
+                                colors: labelColor,
+                                fontSize: isMobile ? '10px' : '12px'
+                            },
+                            formatter: function (val) {
+                                return val;
+                            }
+                        }
+                    },
+                    colors: [lightColor],
+                    grid: {
+                        borderColor: borderColor
+                    }
+                };
+
+                chart.self = new ApexCharts(element, options);
+                chart.self.render();
+                chart.rendered = true;
+                chart.currentWidth = element.offsetWidth;
+            };
+
+            // Public methods
+            return {
+                init: function () {
+                    initChart(chart);
+
+                    let resizeTimeout;
+                    window.addEventListener('resize', function () {
+                        clearTimeout(resizeTimeout);
+
+                        resizeTimeout = setTimeout(function () {
+                            var newWidth = element.offsetWidth;
+
+                            // Only re-render if the width has changed
+                            if (chart.currentWidth !== newWidth) {
+                                if (chart.rendered) {
+                                    chart.self.destroy();
+                                }
+                                initChart(chart);
+                            }
+                        }, 300); // Shorter debounce for better responsiveness
+                    });
+                }
+            };
+        }();
+
+        // Webpack support
+        if (typeof module !== 'undefined') {
+            module.exports = revenueChart;
+            module.exports = netVolumeChart;
+            module.exports = disputesChart;
+            module.exports = refundsChart;
+            module.exports = newCustomersChart;
+        }
+
+        // On document ready
+        KTUtil.onDOMContentLoaded(function() {
+            revenueChart.init();
+            netVolumeChart.init();
+            disputesChart.init();
+            refundsChart.init();
+            newCustomersChart.init();
+        });
     </script>
 
     <script type="text/javascript">
