@@ -1235,7 +1235,10 @@
                     },
                     locale: {
                         format: "DD/MM/YYYY"
-                    }
+                    },
+                    autoUpdateInput: false,
+                    autoApply: false,
+                    alwaysShowCalendars: true
                 }).on('apply.daterangepicker', function(ev, picker) {
                     // This will be triggered when the user selects a date range
                     var startDate = picker.startDate.format('DD/MM/YYYY');
@@ -1244,7 +1247,10 @@
                     // Custom logic for when the date range is changed
                     console.log('Date range selected: ' + startDate + ' to ' + endDate);
 
-                    //dt.search(startDate+'|'+endDate).draw();
+                    $(this).val(startDate + ' - ' + endDate);
+                }).on('cancel.daterangepicker', function(ev, picker) {
+                    // Clear the input field if the user cancels
+                    $(this).val('');
                 });
 
                 $("#all_transactions_datepicker").val('');
@@ -1274,7 +1280,10 @@
                 },
                     locale: {
                         format: "DD/MM/YYYY"
-                    }
+                    },
+                    autoUpdateInput: false,
+                    autoApply: false,
+                    alwaysShowCalendars: true
             }).on('apply.daterangepicker', function(ev, picker) {
                 // This will be triggered when the user selects a date range
                 var startDate = picker.startDate.format('DD/MM/YYYY');
@@ -1283,7 +1292,10 @@
                 // Custom logic for when the date range is changed
                 console.log('Date range selected: ' + startDate + ' to ' + endDate);
 
-                //dt.search(startDate+'|'+endDate).draw();
+                $(this).val(startDate + ' - ' + endDate);
+            }).on('cancel.daterangepicker', function(ev, picker) {
+                // Clear the input field if the user cancels
+                $(this).val('');
             });
 
             $("#stats_datepicker").val('');
@@ -1299,7 +1311,10 @@
                 },
                     locale: {
                         format: "DD/MM/YYYY"
-                    }
+                    },
+                    autoUpdateInput: false,
+                    autoApply: false,
+                    alwaysShowCalendars: true
             }).on('apply.daterangepicker', function(ev, picker) {
                 // This will be triggered when the user selects a date range
                 var startDate = picker.startDate.format('DD/MM/YYYY');
@@ -1308,7 +1323,10 @@
                 // Custom logic for when the date range is changed
                 console.log('Date range selected: ' + startDate + ' to ' + endDate);
 
-                //dt.search(startDate+'|'+endDate).draw();
+                $(this).val(startDate + ' - ' + endDate);
+            }).on('cancel.daterangepicker', function(ev, picker) {
+                // Clear the input field if the user cancels
+                $(this).val('');
             });
 
             $("#grossVolume_datepicker").val('');
